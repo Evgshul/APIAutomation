@@ -62,7 +62,7 @@ Scenario 4 Delete by ID (DELETE)
     create session  deleteUser   ${base_url}
     ${response}=    delete request  deleteUser    /api/userAccounts/userAccount/1
 
-#Validations
+    #Validations
     ${status_code}=     convert to string   ${response.status_code}
     should be equal     ${status_code}      200
 
