@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.0.3 (Python 3.9.5 on win32)" generated="20210622 10:00:57.063" rpa="false" schemaversion="2">
+<suite id="s1" name="UA TC" source="C:\Users\Admin\PycharmProjects\APIAutomation\UserAccountsAPI\UA_TC.robot">
+<test id="s1-t1" name="Scenario 1: Create new userAccounts(POST)">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>addUser</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210622 10:00:57.438" level="INFO">Creating Session using : alias=addUser, url=http://localhost:8080, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210622 10:00:57.438" endtime="20210622 10:00:57.438"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${body}</var>
+<arg>id=1</arg>
+<arg>name=Generic Name</arg>
+<arg>phone=999999999</arg>
+<arg>email=genericname@company.com</arg>
+<arg>address=Generic Street 42 Earth</arg>
+<arg>country=Navarro</arg>
+<arg>department=T21R</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210622 10:00:57.438" level="INFO">${body} = {'id': '1', 'name': 'Generic Name', 'phone': '999999999', 'email': 'genericname@company.com', 'address': 'Generic Street 42 Earth', 'country': 'Navarro', 'department': 'T21R'}</msg>
+<status status="PASS" starttime="20210622 10:00:57.438" endtime="20210622 10:00:57.438"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210622 10:00:57.438" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20210622 10:00:57.438" endtime="20210622 10:00:57.438"/>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>addUser</arg>
+<arg>/api/userAccounts/create</arg>
+<arg>data=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>*DEPRECATED* Please use `POST On Session` instead.</doc>
+<msg timestamp="20210622 10:00:57.438" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<msg timestamp="20210622 10:00:58.381" level="INFO">POST Request : url=http://localhost:8080/api/userAccounts/create 
+ path_url=/api/userAccounts/create 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '175'} 
+ body={"id": "1", "name": "Generic Name", "phone": "999999999", "email": "genericname@company.com", "address": "Generic Street 42 Earth", "country": "Navarro", "department": "T21R"} 
+ </msg>
+<msg timestamp="20210622 10:00:58.381" level="INFO">POST Response : url=http://localhost:8080/api/userAccounts/create 
+ status=200, reason= 
+ headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Tue, 22 Jun 2021 07:00:58 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'} 
+ body={"message":"User Account create success!!!","status":"OK"} 
+ </msg>
+<msg timestamp="20210622 10:00:58.381" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210622 10:00:57.438" endtime="20210622 10:00:58.381"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210622 10:00:58.381" endtime="20210622 10:00:58.381"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210622 10:00:58.381" endtime="20210622 10:00:58.381"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210622 10:00:58.381" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20210622 10:00:58.381" endtime="20210622 10:00:58.381"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20210622 10:00:58.381" endtime="20210622 10:00:58.381"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${res_boby}</var>
+<arg>${response.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210622 10:00:58.381" level="INFO">${res_boby} = {"message":"User Account create success!!!","status":"OK"}</msg>
+<status status="PASS" starttime="20210622 10:00:58.381" endtime="20210622 10:00:58.381"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${res_boby}</arg>
+<arg>User Account create success!!!</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20210622 10:00:58.381" endtime="20210622 10:00:58.381"/>
+</kw>
+<status status="PASS" starttime="20210622 10:00:57.438" endtime="20210622 10:00:58.381"/>
+</test>
+<test id="s1-t2" name="Scenario 2 Create second userAccounts(POST)">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>addSecondUser</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210622 10:00:58.381" level="INFO">Creating Session using : alias=addSecondUser, url=http://localhost:8080, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210622 10:00:58.381" endtime="20210622 10:00:58.381"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${body}</var>
+<arg>id=2</arg>
+<arg>name=Kuill</arg>
+<arg>phone=99999999999999</arg>
+<arg>email=genericname@company.com</arg>
+<arg>address=Generic Street 42 Hoth</arg>
+<arg>country=Arvala</arg>
+<arg>department=T21R</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210622 10:00:58.381" level="INFO">${body} = {'id': '2', 'name': 'Kuill', 'phone': '99999999999999', 'email': 'genericname@company.com', 'address': 'Generic Street 42 Hoth', 'country': 'Arvala', 'department': 'T21R'}</msg>
+<status status="PASS" starttime="20210622 10:00:58.381" endtime="20210622 10:00:58.381"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210622 10:00:58.397" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20210622 10:00:58.397" endtime="20210622 10:00:58.397"/>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>addUser</arg>
+<arg>/api/userAccounts/create</arg>
+<arg>data=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>*DEPRECATED* Please use `POST On Session` instead.</doc>
+<msg timestamp="20210622 10:00:58.397" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<msg timestamp="20210622 10:00:58.428" level="INFO">POST Request : url=http://localhost:8080/api/userAccounts/create 
+ path_url=/api/userAccounts/create 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '171'} 
+ body={"id": "2", "name": "Kuill", "phone": "99999999999999", "email": "genericname@company.com", "address": "Generic Street 42 Hoth", "country": "Arvala", "department": "T21R"} 
+ </msg>
+<msg timestamp="20210622 10:00:58.428" level="INFO">POST Response : url=http://localhost:8080/api/userAccounts/create 
+ status=400, reason= 
+ headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Tue, 22 Jun 2021 07:00:58 GMT', 'Connection': 'close'} 
+ body={"timestamp":"2021-06-22T07:00:58.412+00:00","status":"400 BAD_REQUEST","details":"phone should be minimum 3 and maximum 12 characters long"} 
+ </msg>
+<msg timestamp="20210622 10:00:58.428" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20210622 10:00:58.397" endtime="20210622 10:00:58.428"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210622 10:00:58.428" endtime="20210622 10:00:58.428"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210622 10:00:58.428" endtime="20210622 10:00:58.428"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210622 10:00:58.428" level="INFO">${status_code} = 400</msg>
+<status status="PASS" starttime="20210622 10:00:58.428" endtime="20210622 10:00:58.428"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>400</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20210622 10:00:58.428" endtime="20210622 10:00:58.428"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${res_boby}</var>
+<arg>${response.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210622 10:00:58.428" level="INFO">${res_boby} = {"timestamp":"2021-06-22T07:00:58.412+00:00","status":"400 BAD_REQUEST","details":"phone should be minimum 3 and maximum 12 characters long"}</msg>
+<status status="PASS" starttime="20210622 10:00:58.428" endtime="20210622 10:00:58.428"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${res_boby}</arg>
+<arg>phone should be minimum 3 and maximum 12 characters long</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20210622 10:00:58.428" endtime="20210622 10:00:58.428"/>
+</kw>
+<status status="PASS" starttime="20210622 10:00:58.381" endtime="20210622 10:00:58.444"/>
+</test>
+<test id="s1-t3" name="Scenario 3 Update an existing userAccounts(PUT)">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>updateUser</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210622 10:00:58.444" level="INFO">Creating Session using : alias=updateUser, url=http://localhost:8080, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210622 10:00:58.444" endtime="20210622 10:00:58.444"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${body}</var>
+<arg>id=1</arg>
+<arg>name=Generic Name</arg>
+<arg>phone=222222222</arg>
+<arg>email=genericname@company.com</arg>
+<arg>address=GGeneric Street 42 Earth</arg>
+<arg>country=Navarro</arg>
+<arg>department=T21R</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210622 10:00:58.444" level="INFO">${body} = {'id': '1', 'name': 'Generic Name', 'phone': '222222222', 'email': 'genericname@company.com', 'address': 'GGeneric Street 42 Earth', 'country': 'Navarro', 'department': 'T21R'}</msg>
+<status status="PASS" starttime="20210622 10:00:58.444" endtime="20210622 10:00:58.444"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210622 10:00:58.444" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20210622 10:00:58.444" endtime="20210622 10:00:58.444"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>updateUser</arg>
+<arg>/api/userAccounts/updateUserAccount/1</arg>
+<arg>data=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>*DEPRECATED* Please use `PUT On Session` instead.</doc>
+<msg timestamp="20210622 10:00:58.444" level="WARN">Keyword 'RequestsLibrary.Put Request' is deprecated. Please use `PUT On Session` instead.</msg>
+<msg timestamp="20210622 10:00:58.528" level="INFO">PUT Request : url=http://localhost:8080/api/userAccounts/updateUserAccount/1 
+ path_url=/api/userAccounts/updateUserAccount/1 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '176'} 
+ body={"id": "1", "name": "Generic Name", "phone": "222222222", "email": "genericname@company.com", "address": "GGeneric Street 42 Earth", "country": "Navarro", "department": "T21R"} 
+ </msg>
+<msg timestamp="20210622 10:00:58.528" level="INFO">PUT Response : url=http://localhost:8080/api/userAccounts/updateUserAccount/1 
+ status=200, reason= 
+ headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Tue, 22 Jun 2021 07:00:58 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'} 
+ body={"message":"User Account with id 1 updated successful !!!","status":"OK"} 
+ </msg>
+<msg timestamp="20210622 10:00:58.528" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210622 10:00:58.444" endtime="20210622 10:00:58.528"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210622 10:00:58.528" endtime="20210622 10:00:58.528"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210622 10:00:58.528" endtime="20210622 10:00:58.544"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210622 10:00:58.544" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20210622 10:00:58.544" endtime="20210622 10:00:58.544"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20210622 10:00:58.544" endtime="20210622 10:00:58.544"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${res_boby}</var>
+<arg>${response.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210622 10:00:58.544" level="INFO">${res_boby} = {"message":"User Account with id 1 updated successful !!!","status":"OK"}</msg>
+<status status="PASS" starttime="20210622 10:00:58.544" endtime="20210622 10:00:58.544"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${res_boby}</arg>
+<arg>User Account with id 1 updated successful !!!</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20210622 10:00:58.544" endtime="20210622 10:00:58.544"/>
+</kw>
+<status status="PASS" starttime="20210622 10:00:58.444" endtime="20210622 10:00:58.544"/>
+</test>
+<test id="s1-t4" name="Scenario 4 Delete by ID (DELETE)">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>deleteUser</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210622 10:00:58.544" level="INFO">Creating Session using : alias=deleteUser, url=http://localhost:8080, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210622 10:00:58.544" endtime="20210622 10:00:58.544"/>
+</kw>
+<kw name="Delete Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>deleteUser</arg>
+<arg>/api/userAccounts/userAccount/1</arg>
+<doc>*DEPRECATED* Please use `DELETE On Session` instead.</doc>
+<msg timestamp="20210622 10:00:58.559" level="WARN">Keyword 'RequestsLibrary.Delete Request' is deprecated. Please use `DELETE On Session` instead.</msg>
+<msg timestamp="20210622 10:00:58.813" level="INFO">DELETE Request : url=http://localhost:8080/api/userAccounts/userAccount/1 
+ path_url=/api/userAccounts/userAccount/1 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg timestamp="20210622 10:00:58.813" level="INFO">DELETE Response : url=http://localhost:8080/api/userAccounts/userAccount/1 
+ status=200, reason= 
+ headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Tue, 22 Jun 2021 07:00:58 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'} 
+ body={"user Account 1 deleted ":true} 
+ </msg>
+<msg timestamp="20210622 10:00:58.813" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210622 10:00:58.559" endtime="20210622 10:00:58.813"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210622 10:00:58.813" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20210622 10:00:58.813" endtime="20210622 10:00:58.813"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20210622 10:00:58.813" endtime="20210622 10:00:58.813"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${res_boby}</var>
+<arg>${response.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210622 10:00:58.813" level="INFO">${res_boby} = {"user Account 1 deleted ":true}</msg>
+<status status="PASS" starttime="20210622 10:00:58.813" endtime="20210622 10:00:58.813"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${res_boby}</arg>
+<arg>user Account 1 deleted</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20210622 10:00:58.813" endtime="20210622 10:00:58.829"/>
+</kw>
+<status status="PASS" starttime="20210622 10:00:58.544" endtime="20210622 10:00:58.829"/>
+</test>
+<status status="PASS" starttime="20210622 10:00:57.077" endtime="20210622 10:00:58.829"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="4" fail="0" skip="0" id="s1" name="UA TC">UA TC</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20210622 10:00:57.438" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<msg timestamp="20210622 10:00:58.397" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<msg timestamp="20210622 10:00:58.444" level="WARN">Keyword 'RequestsLibrary.Put Request' is deprecated. Please use `PUT On Session` instead.</msg>
+<msg timestamp="20210622 10:00:58.559" level="WARN">Keyword 'RequestsLibrary.Delete Request' is deprecated. Please use `DELETE On Session` instead.</msg>
+</errors>
+</robot>
